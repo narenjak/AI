@@ -117,6 +117,23 @@ def astar (board,start,end):
             #openls.append(child_of_cur)
     return None
 
+def show(maze,start,end,path):
+    for i in range (25):
+        temp = ''
+        for j in range (25):
+            if (maze[i][j] == 1):
+                if ((i,j) == start):
+                    temp += 'S  '
+                elif ((i,j) == end):
+                    temp += 'E  '
+                elif ((i,j) in path):
+                    temp += '*  '
+                else:
+                    temp += '1  '
+            elif (maze[i][j] == 0):
+                temp += '0  '
+        print (temp)
+
 def main():
     maze = [
     [1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1],
@@ -146,24 +163,30 @@ def main():
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     ]
 
+
     print('A:')  #outputcalculate the output of part A question 4
     start = (13, 2)
     goal  = (5, 23)
     path = astar(maze, start, goal)
     print(path)
+    show(maze,start,goal,path)
     print('path cost: ' + str(len(path)-1))
+    
     print('B:')  #outputcalculate the output of part B question 4
     start = (13, 2)
     goal  = (3,  2)
     path = astar(maze, start, goal)
     print(path)
+    show(maze,start,goal,path)
     print('path cost: ' + str(len(path)-1))
+
     print('C:')  #outputcalculate the output of part C question 4
     start = (0 , 0)
     goal  = (24,24)
     path = astar(maze, start, goal)
     try:  #error management
         print(path)
+        show(maze,start,goal,path)
         print('path cost: ' + str(len(path)-1))
     except:
         print('no solution')
